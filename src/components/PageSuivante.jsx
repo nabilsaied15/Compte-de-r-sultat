@@ -422,7 +422,7 @@ function PageSuivante({ onBack }) {
         formatted = numStr[i] + formatted
         count++
       }
-      return formatted + ' €'
+      return formatted
     }
     
     const formatValueWithZeroForPDF = (value) => {
@@ -441,7 +441,7 @@ function PageSuivante({ onBack }) {
         formatted = numStr[i] + formatted
         count++
       }
-      return formatted + ' €'
+      return formatted
     }
     
     // Page 2 - Tableau première page

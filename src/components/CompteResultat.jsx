@@ -829,7 +829,7 @@ function CompteResultat() {
           formatted = numStr[i] + formatted
           count++
         }
-        return formatted + ' €'
+        return formatted
       }
       
       const formatValueWithZeroForPDF = (value) => {
@@ -848,7 +848,7 @@ function CompteResultat() {
           formatted = numStr[i] + formatted
           count++
         }
-        return formatted + ' €'
+        return formatted
       }
       
       // Calculer les totaux de la deuxième page
@@ -1327,7 +1327,7 @@ function CompteResultat() {
       count++
     }
     
-    return formatted + ' €'
+    return formatted
   }
   
   // Fonction pour formater les valeurs avec zéro pour le PDF (identique à formatValueWithZero)
@@ -1351,7 +1351,7 @@ function CompteResultat() {
       count++
     }
     
-    return formatted + ' €'
+    return formatted
   }
 
   // Fonction pour charger depuis localStorage
