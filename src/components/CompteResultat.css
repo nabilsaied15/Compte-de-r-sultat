@@ -1,0 +1,566 @@
+.compte-resultat {
+  background-color: white;
+  color: #000;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.add-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.add-button:active {
+  background-color: #004085;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: #000;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #666;
+  margin-left: 5px;
+}
+
+.financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.financial-table thead {
+  border-bottom: none;
+}
+
+.financial-table th {
+  text-align: left;
+  padding: 8px 15px;
+  font-weight: normal;
+  border-bottom: none;
+}
+
+.date-input {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: center;
+  background-color: transparent;
+  font-family: inherit;
+  box-sizing: border-box;
+  color: #000;
+  font-weight: 500;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.date-input:hover {
+  border-color: #999;
+}
+
+.label-column {
+  width: 60%;
+  text-align: left;
+}
+
+.value-column {
+  width: 20%;
+  text-align: right;
+}
+
+.financial-table td {
+  padding: 6px 15px;
+  border-bottom: none;
+}
+
+.financial-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.section-header {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.section-header td {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-bottom: none;
+}
+
+.label {
+  text-align: left;
+  padding-left: 0;
+}
+
+.sub-item .label {
+  padding-left: 30px;
+}
+
+.sub-detail .label {
+  padding-left: 50px;
+  font-size: 11px;
+  color: #555;
+}
+
+.value {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.total-row {
+  background-color: #f0f0f0;
+  border-top: none;
+  border-bottom: none;
+}
+
+.total-row td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.result-row {
+  background-color: #e8e8e8;
+  border-top: none;
+}
+
+.result-row td {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 14px;
+}
+
+.negative {
+  color: #d32f2f;
+}
+
+.positive {
+  color: #28a745;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #ff6b6b;
+}
+
+.add-form {
+  padding: 25px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  margin: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #444;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  background-color: #2d2d2d;
+  color: #ffffff;
+  transition: all 0.3s;
+}
+
+.form-group input::placeholder {
+  color: #888;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  background-color: #333;
+}
+
+.form-group select {
+  color: #ffffff;
+}
+
+.form-group select option {
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #444;
+}
+
+.cancel-button,
+.submit-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancel-button {
+  background-color: #555;
+  color: white;
+  border: 2px solid #555;
+}
+
+.cancel-button:hover {
+  background-color: #666;
+  border-color: #666;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #333 0%, #000 100%);
+  color: white;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #000 0%, #222 100%);
+  border-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Styles pour les boutons d'action */
+.actions-column {
+  width: 200px;
+  text-align: center;
+}
+
+.actions-cell {
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.edit-btn:hover:not(:disabled) {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.move-up-btn:hover:not(:disabled),
+.move-down-btn:hover:not(:disabled) {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+.move-section-btn:hover:not(:disabled) {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+.editable-row:hover {
+  background-color: #f8f9fa;
+}
+
+.editable-label {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.editable-label:hover {
+  background-color: #e3f2fd;
+  border-radius: 4px;
+}
+
+.editable-value {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.editable-value:hover {
+  background-color: #e3f2fd;
+  border-radius: 4px;
+}
+
+.editable-row {
+  cursor: context-menu;
+}
+
+/* Styles pour les boutons d'action en bas */
+.action-buttons-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 2px solid #ddd;
+}
+
+.save-button,
+.save-pdf-button,
+.next-button,
+.back-button,
+.clear-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.save-button {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: 2px solid #28a745;
+}
+
+.save-button:hover {
+  background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+}
+
+.save-pdf-button {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: 2px solid #007bff;
+}
+
+.save-pdf-button:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.next-button {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: 2px solid #007bff;
+}
+
+.next-button:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.back-button {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  color: white;
+  border: 2px solid #6c757d;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #5a6268 0%, #6c757d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+}
+
+.save-button:active,
+.save-pdf-button:active,
+.next-button:active,
+.back-button:active,
+.clear-button:active {
+  transform: translateY(0);
+}
+
+.clear-button {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  border: 2px solid #dc3545;
+}
+
+.clear-button:hover {
+  background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+}
+
+/* Styles pour les boutons de type et catégorie dans le formulaire */
+.type-buttons,
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.type-button,
+.category-button {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid #444;
+  border-radius: 6px;
+  background-color: #2d2d2d;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.type-button:hover,
+.category-button:hover {
+  background-color: #444;
+  border-color: #666;
+}
+
+.type-button.active,
+.category-button.active {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  border-color: #0ea5e9;
+  color: white;
+  box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
+}
+
+.type-button.active:hover,
+.category-button.active:hover {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  border-color: #0284c7;
+}
+
