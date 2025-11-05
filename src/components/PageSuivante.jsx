@@ -497,6 +497,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 2, pageWidth - marginRight, yPosition + 2)
       yPosition += lineHeight
     })
     
@@ -518,6 +522,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 2, pageWidth - marginRight, yPosition + 2)
       yPosition += lineHeight
     })
     
@@ -564,6 +572,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 2, pageWidth - marginRight, yPosition + 2)
       yPosition += lineHeight
     })
     
@@ -585,6 +597,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 2, pageWidth - marginRight, yPosition + 2)
       yPosition += lineHeight
     })
     
@@ -689,6 +705,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -702,6 +722,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -735,6 +759,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -748,6 +776,27 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
+      yPosition += lineHeightSmall // Utilise la hauteur réduite
+    })
+    
+    ;(addedLines.charges_financieres || []).forEach(line => {
+      let label = line.label
+      const maxWidth = dateColX - marginLeft - 90
+      if (doc.getTextWidth(label) > maxWidth) {
+        label = doc.splitTextToSize(label, maxWidth)[0] + '...'
+      }
+      doc.text(label, marginLeft, yPosition)
+      if (line.value && line.value.trim() !== '') {
+        doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
+      }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -817,6 +866,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -830,6 +883,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -863,6 +920,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
@@ -876,6 +937,10 @@ function PageSuivante({ onBack }) {
       if (line.value && line.value.trim() !== '') {
         doc.text(formatValueForPDF(line.value), dateColX, yPosition, { align: 'right' })
       }
+      // Ligne de séparation après chaque ligne
+      doc.setLineWidth(0.2)
+      doc.setDrawColor(220, 220, 220)
+      doc.line(marginLeft, yPosition + 1.5, pageWidth - marginRight, yPosition + 1.5)
       yPosition += lineHeightSmall // Utilise la hauteur réduite
     })
     
