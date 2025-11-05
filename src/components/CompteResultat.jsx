@@ -232,14 +232,14 @@ function CompteResultat() {
     if (!value || value.trim() === '') return ''
     const num = parseFloat(value.replace(/\s/g, '').replace('€', '').trim())
     if (isNaN(num) || num === 0) return ''
-    return num.toLocaleString('fr-FR') + ' €'
+    return num.toLocaleString('fr-FR')
   }
 
   const formatValueWithZero = (value) => {
     if (!value || value.trim() === '') return ''
     const num = parseFloat(value.replace(/\s/g, '').replace('€', '').trim())
     if (isNaN(num)) return ''
-    return num.toLocaleString('fr-FR') + ' €'
+    return num.toLocaleString('fr-FR')
   }
 
   // Fonction pour parser une valeur en nombre
@@ -1285,202 +1285,6 @@ function CompteResultat() {
         doc.setFont('helvetica', 'bold')
         doc.text('VIII', marginLeft, yPosition)
       }
-      
-      // Page 5 - Graphiques circulaires des statistiques
-      doc.addPage()
-      
-      doc.setFontSize(10)
-      doc.setFont('helvetica', 'normal')
-      doc.text('ASSOCIATION AAPISE | Comptes annuels', marginLeft, 15)
-      doc.text(data.dates?.date || dates.date, pageWidth - marginLeft, 15, { align: 'right' })
-      
-      doc.setFontSize(18)
-      doc.setFont('helvetica', 'bold')
-      doc.text('Statistiques et Répartition', pageWidth / 2, 30, { align: 'center' })
-      
-      // Calculer les statistiques pour les graphiques
-      const statsProduitsExploitation = produits.reduce((sum, line) => sum + parseValue(line.value), 0) +
-                                       (firstPageData.addedLines?.produits || []).reduce((sum, line) => sum + parseValue(line.value), 0)
-      const statsProduitsFinanciers = totalProduitsFinanciers
-      const statsProduitsExceptionnels = totalProduitsExceptionnels
-      const totalProduitsAll = statsProduitsExploitation + statsProduitsFinanciers + statsProduitsExceptionnels
-      
-      const statsChargesExploitation = charges.reduce((sum, line) => sum + parseValue(line.value), 0) +
-                                      (firstPageData.addedLines?.charges || []).reduce((sum, line) => sum + parseValue(line.value), 0)
-      const statsChargesFinancieres = totalChargesFinancieres
-      const statsChargesExceptionnelles = totalChargesExceptionnelles
-      const totalChargesAll = statsChargesExploitation + statsChargesFinancieres + statsChargesExceptionnelles
-      
-      yPosition = 50
-      
-      // Graphique 1 : Répartition des Produits
-      doc.setFontSize(14)
-      doc.setFont('helvetica', 'bold')
-      doc.text('Répartition des Produits', pageWidth / 2, yPosition, { align: 'center' })
-      yPosition += 10
-      
-      const chart1X = pageWidth / 2
-      const chart1Y = yPosition + 25
-      const chart1Radius = 25
-      
-      const produitsData = [statsProduitsExploitation, statsProduitsFinanciers, statsProduitsExceptionnels]
-      const produitsLabels = ['Produits d\'exploitation', 'Produits financiers', 'Produits exceptionnels']
-      const produitsColors = [[52, 152, 219], [46, 204, 113], [155, 89, 182]]
-      
-      if (totalProduitsAll > 0) {
-        let currentAngle = -90 // Commencer en haut (-90 degrés)
-        produitsData.forEach((value, index) => {
-          if (value > 0) {
-            const angle = (value / totalProduitsAll) * 360
-            const startRad = (currentAngle * Math.PI) / 180
-            const endRad = ((currentAngle + angle) * Math.PI) / 180
-            
-            doc.setFillColor(produitsColors[index][0], produitsColors[index][1], produitsColors[index][2])
-            doc.setDrawColor(produitsColors[index][0], produitsColors[index][1], produitsColors[index][2])
-            
-            // Dessiner le secteur avec des lignes pour créer un effet rempli
-            for (let a = currentAngle; a <= currentAngle + angle; a += 3) {
-              const rad = (a * Math.PI) / 180
-              const x1 = chart1X + chart1Radius * 0.6 * Math.cos(rad)
-              const y1 = chart1Y + chart1Radius * 0.6 * Math.sin(rad)
-              const x2 = chart1X + chart1Radius * Math.cos(rad)
-              const y2 = chart1Y + chart1Radius * Math.sin(rad)
-              doc.line(x1, y1, x2, y2)
-            }
-            
-            // Lignes radiales
-            const xStart = chart1X + chart1Radius * 0.6 * Math.cos(startRad)
-            const yStart = chart1Y + chart1Radius * 0.6 * Math.sin(startRad)
-            const xEnd = chart1X + chart1Radius * Math.cos(startRad)
-            const yEnd = chart1Y + chart1Radius * Math.sin(startRad)
-            doc.line(chart1X, chart1Y, xStart, yStart)
-            doc.line(xStart, yStart, xEnd, yEnd)
-            
-            const xStart2 = chart1X + chart1Radius * 0.6 * Math.cos(endRad)
-            const yStart2 = chart1Y + chart1Radius * 0.6 * Math.sin(endRad)
-            const xEnd2 = chart1X + chart1Radius * Math.cos(endRad)
-            const yEnd2 = chart1Y + chart1Radius * Math.sin(endRad)
-            doc.line(chart1X, chart1Y, xStart2, yStart2)
-            doc.line(xStart2, yStart2, xEnd2, yEnd2)
-            
-            const percent = ((value / totalProduitsAll) * 100).toFixed(1)
-            const midAngle = currentAngle + angle / 2
-            const midRad = (midAngle * Math.PI) / 180
-            const labelX = chart1X + chart1Radius * 0.8 * Math.cos(midRad)
-            const labelY = chart1Y + chart1Radius * 0.8 * Math.sin(midRad)
-            
-            doc.setFontSize(9)
-            doc.setTextColor(0, 0, 0)
-            doc.text(`${percent}%`, labelX, labelY)
-            
-            currentAngle += angle
-          }
-        })
-        
-        doc.setLineWidth(2)
-        doc.setDrawColor(0, 0, 0)
-        doc.circle(chart1X, chart1Y, chart1Radius)
-        doc.circle(chart1X, chart1Y, chart1Radius * 0.6)
-      }
-      
-      // Légende produits
-      let legendY = chart1Y + chart1Radius + 20
-      doc.setFontSize(9)
-      doc.setFont('helvetica', 'normal')
-      produitsData.forEach((value, index) => {
-        if (value > 0) {
-          const percent = ((value / totalProduitsAll) * 100).toFixed(1)
-          doc.setFillColor(produitsColors[index][0], produitsColors[index][1], produitsColors[index][2])
-          doc.rect(marginLeft, legendY - 2, 3, 3, 'F')
-          doc.setTextColor(0, 0, 0)
-          doc.text(`${produitsLabels[index]}: ${percent}%`, marginLeft + 6, legendY)
-          legendY += 5
-        }
-      })
-      
-      // Graphique 2 : Répartition des Charges
-      legendY += 10
-      doc.setFontSize(14)
-      doc.setFont('helvetica', 'bold')
-      doc.text('Répartition des Charges', pageWidth / 2, legendY, { align: 'center' })
-      legendY += 10
-      
-      const chart2X = pageWidth / 2
-      const chart2Y = legendY + 25
-      const chart2Radius = 25
-      
-      const chargesData = [statsChargesExploitation, statsChargesFinancieres, statsChargesExceptionnelles]
-      const chargesLabels = ['Charges d\'exploitation', 'Charges financières', 'Charges exceptionnelles']
-      const chargesColors = [[231, 76, 60], [241, 196, 15], [230, 126, 34]]
-      
-      if (totalChargesAll > 0) {
-        let currentAngle = -90 // Commencer en haut
-        chargesData.forEach((value, index) => {
-          if (value > 0) {
-            const angle = (value / totalChargesAll) * 360
-            const startRad = (currentAngle * Math.PI) / 180
-            const endRad = ((currentAngle + angle) * Math.PI) / 180
-            
-            doc.setFillColor(chargesColors[index][0], chargesColors[index][1], chargesColors[index][2])
-            doc.setDrawColor(chargesColors[index][0], chargesColors[index][1], chargesColors[index][2])
-            
-            for (let a = currentAngle; a <= currentAngle + angle; a += 3) {
-              const rad = (a * Math.PI) / 180
-              const x1 = chart2X + chart2Radius * 0.6 * Math.cos(rad)
-              const y1 = chart2Y + chart2Radius * 0.6 * Math.sin(rad)
-              const x2 = chart2X + chart2Radius * Math.cos(rad)
-              const y2 = chart2Y + chart2Radius * Math.sin(rad)
-              doc.line(x1, y1, x2, y2)
-            }
-            
-            const xStart = chart2X + chart2Radius * 0.6 * Math.cos(startRad)
-            const yStart = chart2Y + chart2Radius * 0.6 * Math.sin(startRad)
-            const xEnd = chart2X + chart2Radius * Math.cos(startRad)
-            const yEnd = chart2Y + chart2Radius * Math.sin(startRad)
-            doc.line(chart2X, chart2Y, xStart, yStart)
-            doc.line(xStart, yStart, xEnd, yEnd)
-            
-            const xStart2 = chart2X + chart2Radius * 0.6 * Math.cos(endRad)
-            const yStart2 = chart2Y + chart2Radius * 0.6 * Math.sin(endRad)
-            const xEnd2 = chart2X + chart2Radius * Math.cos(endRad)
-            const yEnd2 = chart2Y + chart2Radius * Math.sin(endRad)
-            doc.line(chart2X, chart2Y, xStart2, yStart2)
-            doc.line(xStart2, yStart2, xEnd2, yEnd2)
-            
-            const percent = ((value / totalChargesAll) * 100).toFixed(1)
-            const midAngle = currentAngle + angle / 2
-            const midRad = (midAngle * Math.PI) / 180
-            const labelX = chart2X + chart2Radius * 0.8 * Math.cos(midRad)
-            const labelY = chart2Y + chart2Radius * 0.8 * Math.sin(midRad)
-            
-            doc.setFontSize(9)
-            doc.setTextColor(0, 0, 0)
-            doc.text(`${percent}%`, labelX, labelY)
-            
-            currentAngle += angle
-          }
-        })
-        
-        doc.setLineWidth(2)
-        doc.setDrawColor(0, 0, 0)
-        doc.circle(chart2X, chart2Y, chart2Radius)
-        doc.circle(chart2X, chart2Y, chart2Radius * 0.6)
-      }
-      
-      // Légende charges
-      legendY = chart2Y + chart2Radius + 20
-      doc.setFontSize(9)
-      doc.setFont('helvetica', 'normal')
-      chargesData.forEach((value, index) => {
-        if (value > 0) {
-          const percent = ((value / totalChargesAll) * 100).toFixed(1)
-          doc.setFillColor(chargesColors[index][0], chargesColors[index][1], chargesColors[index][2])
-          doc.rect(marginLeft, legendY - 2, 3, 3, 'F')
-          doc.setTextColor(0, 0, 0)
-          doc.text(`${chargesLabels[index]}: ${percent}%`, marginLeft + 6, legendY)
-          legendY += 5
-        }
-      })
       
       // Sauvegarder le PDF complet
       const fileName = `Compte_Resultat_${dates.date.replace(/\//g, '-')}.pdf`
